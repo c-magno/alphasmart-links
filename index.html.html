@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Smart</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: #050f05;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 52px 20px 64px;
+    font-family: 'Barlow', sans-serif;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .as-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: #050f05;
+    overflow: hidden;
+  }
+
+  .as-triangle {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 260px solid transparent;
+    border-right: 260px solid transparent;
+    border-bottom: 520px solid #0a2a0a;
+    opacity: 0.7;
+  }
+
+  .as-triangle-2 {
+    position: absolute;
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-bottom: 380px solid #0d1f0d;
+    opacity: 0.9;
+  }
+
+  .as-glow-top {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(0,220,80,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .as-dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(0,200,80,0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  .as-stripe-left {
+    position: absolute;
+    top: 0; left: 0;
+    width: 8px; height: 100%;
+    background: linear-gradient(180deg, #00dc50 0%, transparent 100%);
+    opacity: 0.5;
+  }
+
+  .as-stripe-right {
+    position: absolute;
+    top: 0; right: 0;
+    width: 8px; height: 100%;
+    background: linear-gradient(180deg, #00dc50 0%, transparent 100%);
+    opacity: 0.5;
+  }
+
+  .as-page {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .as-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .as-logo-icon {
+    width: 84px;
+    height: 84px;
+    margin-bottom: 10px;
+  }
+
+  .as-logo-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+  }
+
+  .as-logo-alpha {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: #ffffff;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  .as-logo-smart {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: #00dc50;
+    letter-spacing: 4px;
+    line-height: 1;
+    text-shadow: 0 0 18px rgba(0,220,80,0.6);
+  }
+
+  .as-tagline {
+    font-size: 11px;
+    color: #4a7a4a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  .as-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #00dc50, transparent);
+    margin-bottom: 28px;
+    opacity: 0.4;
+  }
+
+  .as-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .as-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: transform 0.13s ease, box-shadow 0.13s ease;
+    cursor: pointer;
+    border: none;
+  }
+
+  .as-btn:active { transform: scale(0.97); }
+
+  .as-btn-wpp {
+    background: #00dc50;
+    color: #050f05;
+    box-shadow: 0 0 20px rgba(0,220,80,0.35);
+  }
+
+  .as-btn-wpp:hover {
+    box-shadow: 0 0 32px rgba(0,220,80,0.55);
+  }
+
+  .as-btn-dark {
+    background: #0d1f0d;
+    color: #e0ffe0;
+    border: 1px solid #1a3a1a;
+  }
+
+  .as-btn-dark:hover {
+    background: #122212;
+    border-color: #00dc50;
+  }
+
+  .as-btn-icon { width: 22px; height: 22px; flex-shrink: 0; }
+  .as-btn-label { flex: 1; }
+  .as-btn-arrow { font-size: 16px; opacity: 0.6; transition: transform 0.2s; }
+
+  .as-map-wrap {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #1a3a1a;
+    height: 0;
+    transition: height 0.35s ease;
+  }
+
+  .as-map-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 260px;
+    border: none;
+  }
+
+  .as-footer {
+    margin-top: 40px;
+    font-size: 11px;
+    color: #2a4a2a;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="as-bg">
+  <div class="as-dots"></div>
+  <div class="as-triangle"></div>
+  <div class="as-triangle-2"></div>
+  <div class="as-glow-top"></div>
+  <div class="as-stripe-left"></div>
+  <div class="as-stripe-right"></div>
+</div>
+
+<div class="as-page">
+
+  <div class="as-logo">
+    <svg class="as-logo-icon" viewBox="0 0 84 84" xmlns="http://www.w3.org/2000/svg">
+      <rect width="84" height="84" rx="18" fill="#0d1f0d" stroke="#00dc50" stroke-width="1.5"/>
+      <polygon points="42,8 68,62 16,62" fill="none" stroke="#00dc50" stroke-width="2.5" stroke-linejoin="round"/>
+      <polygon points="42,20 62,58 22,58" fill="#0a1a0a"/>
+      <line x1="42" y1="30" x2="42" y2="50" stroke="#00dc50" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="42" cy="54" r="2.5" fill="#00dc50"/>
+      <rect x="16" y="64" width="52" height="3" rx="1.5" fill="#00dc50" opacity="0.5"/>
+
+    </svg>
+    <div class="as-logo-text">
+      <span class="as-logo-alpha">ALPHA</span>
+      <span class="as-logo-smart">SMART</span>
+    </div>
+    <span class="as-tagline">Manutenção &amp; Acessórios para Celular</span>
+  </div>
+
+  <div class="as-divider"></div>
+
+  <div class="as-links">
+
+    <a class="as-btn as-btn-wpp"
+      href="https://wa.me/557183186041?text=Ol%C3%A1%2C%20vim%20pelo%20Instagram%20e%20gostaria%20de%20um%20or%C3%A7amento!%20%F0%9F%93%B1"
+      target="_blank">
+      <svg class="as-btn-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.558 4.116 1.531 5.845L.057 23.5l5.797-1.52A11.93 11.93 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.8 9.8 0 01-5.001-1.371l-.358-.213-3.717.975.992-3.622-.234-.373A9.786 9.786 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/>
+      </svg>
+      <span class="as-btn-label">Falar no WhatsApp</span>
+      <span class="as-btn-arrow">→</span>
+    </a>
+
+    <a class="as-btn as-btn-dark" href="#" id="btn-maps" onclick="toggleMap(event)">
+      <svg class="as-btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+        <circle cx="12" cy="9" r="2.5"/>
+      </svg>
+      <span class="as-btn-label">Nossa Localização</span>
+      <span class="as-btn-arrow" id="map-arrow">↓</span>
+    </a>
+
+    <div class="as-map-wrap" id="map-wrap"></div>
+
+  </div>
+
+  <div class="as-footer">© Alpha Smart · Dias D'Ávila, BA</div>
+</div>
+
+<script>
+  var mapLoaded = false;
+
+  function toggleMap(e) {
+    e.preventDefault();
+    var wrap = document.getElementById('map-wrap');
+    var arrow = document.getElementById('map-arrow');
+    var isOpen = wrap.style.height === '260px';
+
+    if (isOpen) {
+      wrap.style.height = '0';
+      arrow.textContent = '↓';
+    } else {
+      if (!mapLoaded) {
+        var iframe = document.createElement('iframe');
+        iframe.src = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3893.40853539864!2d-38.2887307!3d-12.621182599999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7165db4d25b9d3d%3A0x6ed699a621eafea!2sALPHA%20SMART-%20Manuten%C3%A7%C3%A3o%20%26%20Acess%C3%B3rios%20para%20celular!5e0!3m2!1spt-BR!2sbr!4v1778597916276!5m2!1spt-BR!2sbr";
+        iframe.style.cssText = "display:block;width:100%;height:260px;border:none;";
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        wrap.appendChild(iframe);
+        mapLoaded = true;
+      }
+      wrap.style.height = '260px';
+      arrow.textContent = '↑';
+    }
+  }
+</script>
+
+</body>
+</html>
